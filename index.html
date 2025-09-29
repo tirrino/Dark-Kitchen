@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Kitchen - Curso de Cocina Paisa Saludable</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="img/favicon-48x48.png">
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+
+    <style>
+        :root {
+            --primary-color: #2d5016;
+            --secondary-color: #6b8e23;
+            --accent-color: #ff6b35;
+            --dark: #1a1a1a;
+            --light: #f8f9fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: white !important;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-weight: 500;
+            margin: 0 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-color) !important;
+            transform: translateY(-2px);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(45, 80, 22, 0.8), rgba(107, 142, 35, 0.8)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%232d5016" width="1200" height="600"/><path fill="%236b8e23" d="M0 300L100 320L200 280L300 310L400 290L500 330L600 300L700 280L800 320L900 290L1000 310L1100 280L1200 300V600H0Z" opacity="0.3"/></svg>');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(255, 107, 53, 0.2), transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-hero {
+            background: var(--accent-color);
+            color: white;
+            padding: 1rem 3rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-hero:hover {
+            background: #ff8555;
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(255, 107, 53, 0.6);
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            height: 100%;
+            border: 3px solid transparent;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+            border-color: var(--accent-color);
+        }
+
+        .feature-icon {
+            font-size: 3.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            height: 300px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.15) rotate(2deg);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(45, 80, 22, 0.9), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: flex-end;
+            padding: 2rem;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay h4 {
+            color: white;
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin: 0;
+        }
+
+        .testimonial-card {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 6rem;
+            color: rgba(255, 255, 255, 0.2);
+            font-family: Georgia, serif;
+        }
+
+        .testimonial-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--accent-color);
+        }
+
+        .testimonial-role {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        .form-section {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 5rem 0;
+        }
+
+        .form-control,
+        .form-select {
+            border-radius: 10px;
+            border: 2px solid #ddd;
+            padding: 0.8rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 0.2rem rgba(255, 107, 53, 0.25);
+        }
+
+        .btn-submit {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-submit:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(45, 80, 22, 0.3);
+        }
+
+        .price-table {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .price-table thead {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .price-table th {
+            padding: 1.5rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .price-table td {
+            padding: 1.2rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .price-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .price-highlight {
+            color: var(--accent-color);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--dark), #2a2a2a);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 50px;
+            font-size: 1.3rem;
+            margin: 0 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: white;
+            color: var(--accent-color);
+            transform: translateY(-5px) rotate(360deg);
+        }
+
+        .benefits-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .benefits-list li {
+            padding: 1rem 0;
+            font-size: 1.1rem;
+            color: #555;
+            position: relative;
+            padding-left: 2.5rem;
+        }
+
+        .benefits-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 30px;
+            background: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .gallery-item {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#inicio">
+                <i class="fas fa-leaf"></i> Dark Kitchen
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#inicio">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#curso">El Curso</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#galeria">Galería</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testimonios">Testimonios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#precios">Precios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#inscripcion">Inscripción</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header id="inicio" class="hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 hero-content">
+                    <h1>Cocina Paisa Saludable</h1>
+                    <p>Aprende a preparar los platos tradicionales de Medellín con un toque nutritivo y saludable</p>
+                    <a href="#inscripcion" class="btn btn-hero">¡Inscríbete Ahora!</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="curso" class="py-5">
+        <div class="container">
+            <h2 class="section-title">¿Qué Aprenderás?</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <article class="feature-card">
+                        <i class="fas fa-utensils feature-icon"></i>
+                        <h3>Recetas Tradicionales</h3>
+                        <p>Domina la preparación de bandeja paisa, arepas, sancocho y más platos típicos de Antioquia
+                            con técnicas que conservan el sabor auténtico mientras reducen grasas y calorías.</p>
+                    </article>
+                </div>
+                <div class="col-md-4">
+                    <article class="feature-card">
+                        <i class="fas fa-heartbeat feature-icon"></i>
+                        <h3>Nutrición Balanceada</h3>
+                        <p>Descubre cómo sustituir ingredientes por opciones más saludables sin perder el sabor
+                            tradicional. Aprende sobre porciones, valores nutricionales y balance alimenticio.</p>
+                    </article>
+                </div>
+                <div class="col-md-4">
+                    <article class="feature-card">
+                        <i class="fas fa-chef-hat feature-icon"></i>
+                        <h3>Técnicas Profesionales</h3>
+                        <p>Métodos de cocción saludables, organización de ingredientes, presentación de platos y
+                            secretos de chefs profesionales para llevar tu cocina al siguiente nivel.</p>
+                    </article>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-lg-6">
+                    <h3 class="mb-4" style="color: var(--primary-color); font-weight: 700;">Beneficios del Curso</h3>
+                    <ul class="benefits-list">
+                        <li>Clases en vivo con chef profesional certificado</li>
+                        <li>Acceso a plataforma con videos grabados 24/7</li>
+                        <li>Recetario digital descargable con más de 50 recetas</li>
+                        <li>Grupo exclusivo de WhatsApp para dudas y soporte</li>
+                        <li>Certificado digital al completar el curso</li>
+                        <li>Masterclass gratuita sobre emprendimiento gastronómico</li>
+                    </ul>
+                </div>
+                <div class="col-lg-6">
+                    <h3 class="mb-4" style="color: var(--primary-color); font-weight: 700;">Modalidades de Estudio</h3>
+                    <ol style="font-size: 1.1rem; line-height: 2; color: #555;">
+                        <li><strong>Presencial en Medellín:</strong> Clases prácticas en nuestra cocina equipada en El
+                            Poblado</li>
+                        <li><strong>Online en vivo:</strong> Conéctate desde cualquier lugar vía Zoom con interacción
+                            directa</li>
+                        <li><strong>A tu ritmo:</strong> Accede a todo el contenido grabado cuando quieras</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="galeria" class="py-5" style="background: #f8f9fa;">
+        <div class="container">
+            <h2 class="section-title">Galería de Creaciones</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="gallery-item">
+                        <img src="img/bandeja paisa.webp" alt="">
+                        alt="Bandeja Paisa Saludable">
+                        <div class="gallery-overlay">
+                            <h4>Bandeja Paisa Light</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="gallery-item">
+                        <img src="img/arepas.avif" alt="">
+                        alt="Arepas Integrales">
+                        <div class="gallery-overlay">
+                            <h4>Arepas Integrales</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="gallery-item">
+                        <img src="img/sancocho.avif" alt="">
+                        alt="Sancocho Nutritivo">
+                        <div class="gallery-overlay">
+                            <h4>Sancocho Nutritivo</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="gallery-item">
+                        <img src="img/empanadas.webp" alt="">
+                        alt="Empanadas al Horno">
+                        <div class="gallery-overlay">
+                            <h4>Empanadas al Horno</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="gallery-item">
+                        <img src="img/postre.jpg" alt="">
+                        alt="Postres Saludables">
+                        <div class="gallery-overlay">
+                            <h4>Postres sin Azúcar</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="gallery-item">
+                        <img src="img/bebidas.jpg" alt="">
+                        alt="Bebidas Naturales">
+                        <div class="gallery-overlay">
+                            <h4>Bebidas Naturales</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonios" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Lo Que Dicen Nuestros Estudiantes</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <article class="testimonial-card">
+                        <p class="testimonial-text">Excelente curso! Aprendí a cocinar todos los platos que me encantan
+                            pero de forma más saludable. Bajé 8 kilos sin dejar de comer lo que me gusta.</p>
+                        <p class="testimonial-author">María Fernanda López</p>
+                        <p class="testimonial-role">Estudiante - Promoción 2024</p>
+                    </article>
+                </div>
+                <div class="col-md-4">
+                    <article class="testimonial-card">
+                        <p class="testimonial-text">Los chefs son muy profesionales y pacientes. La modalidad online es
+                            perfecta para mi agenda. Recomendado 100% para quienes aman la comida paisa.</p>
+                        <p class="testimonial-author">Carlos Andrés Ruiz</p>
+                        <p class="testimonial-role">Emprendedor Gastronómico</p>
+                    </article>
+                </div>
+                <div class="col-md-4">
+                    <article class="testimonial-card">
+                        <p class="testimonial-text">Gracias a este curso abrí mi propio negocio de comida saludable. El
+                            apoyo de los instructores fue fundamental para lograr mis sueños.</p>
+                        <p class="testimonial-author">Matheiu Alexander Restrepo Giraldo</p>
+                        <p class="testimonial-role">Propietaria Dark Kitchen Express</p>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="precios" class="py-5" style="background: #f8f9fa;">
+        <div class="container">
+            <h2 class="section-title">Planes y Precios</h2>
+            <div class="table-responsive">
+                <table class="table price-table">
+                    <thead>
+                        <tr>
+                            <th>Plan</th>
+                            <th>Duración</th>
+                            <th>Modalidad</th>
+                            <th>Clases</th>
+                            <th>Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Básico</strong></td>
+                            <td>4 semanas</td>
+                            <td>Online grabado</td>
+                            <td>12 clases</td>
+                            <td class="price-highlight">$299.000 COP</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Intermedio</strong></td>
+                            <td>6 semanas</td>
+                            <td>Online en vivo</td>
+                            <td>18 clases + tutorías</td>
+                            <td class="price-highlight">$499.000 COP</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Premium</strong></td>
+                            <td>8 semanas</td>
+                            <td>Presencial</td>
+                            <td>24 clases + materiales</td>
+                            <td class="price-highlight">$899.000 COP</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Masterclass</strong></td>
+                            <td>1 día</td>
+                            <td>Presencial/Online</td>
+                            <td>1 clase intensiva</td>
+                            <td class="price-highlight">$149.000 COP</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section id="inscripcion" class="form-section">
+        <div class="container">
+            <h2 class="section-title">Inscríbete Ahora</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <form class="bg-white p-5 rounded shadow">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="nombre" class="form-label">Nombre Completo</label>
+                                <input type="text" class="form-control" id="nombre" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="telefono" class="form-label">Teléfono</label>
+                                <input type="tel" class="form-control" id="telefono" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="plan" class="form-label">Plan de Interés</label>
+                                <select class="form-select" id="plan" required>
+                                    <option value="">Selecciona un plan</option>
+                                    <option value="basico">Básico - $299.000</option>
+                                    <option value="intermedio">Intermedio - $499.000</option>
+                                    <option value="premium">Premium - $899.000</option>
+                                    <option value="masterclass">Masterclass - $149.000</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label for="experiencia" class="form-label">Experiencia en Cocina</label>
+                                <select class="form-select" id="experiencia" required>
+                                    <option value="">Selecciona tu nivel</option>
+                                    <option value="principiante">Principiante</option>
+                                    <option value="intermedio">Intermedio</option>
+                                    <option value="avanzado">Avanzado</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label for="mensaje" class="form-label">Mensaje o Preguntas</label>
+                                <textarea class="form-control" id="mensaje" rows="4"
+                                    placeholder="Cuéntanos qué te motivó a inscribirte..."></textarea>
+                            </div>
+                            <divclass="col-12 text-center mt-4">
+                                <button type="submit" class="btn btn-submit">Enviar Inscripción</button>
+                        </div>
+                </div>
+                </form>
+            </div>
+        </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h4 style="color: var(--accent-color); font-weight: 700; margin-bottom: 1.5rem;">Dark Kitchen</h4>
+                    <p style="color: rgba(255,255,255,0.8); line-height: 1.8;">Academia de cocina paisa saludable en
+                        Medellín, Colombia. Transformamos la tradición en salud sin perder el sabor.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 style="color: var(--accent-color); font-weight: 700; margin-bottom: 1.5rem;">Contacto</h5>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem; color: rgba(255,255,255,0.8);">
+                            <i class="fas fa-map-marker-alt"
+                                style="color: var(--accent-color); margin-right: 10px;"></i>
+                            El Poblado, Medellín
+                        </li>
+                        <li style="margin-bottom: 0.8rem; color: rgba(255,255,255,0.8);">
+                            <i class="fas fa-phone" style="color: var(--accent-color); margin-right: 10px;"></i>
+                            +57 300 123 4567
+                        </li>
+                        <li style="margin-bottom: 0.8rem; color: rgba(255,255,255,0.8);">
+                            <i class="fas fa-envelope" style="color: var(--accent-color); margin-right: 10px;"></i>
+                            info@darkkitchen.co
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 style="color: var(--accent-color); font-weight: 700; margin-bottom: 1.5rem;">Síguenos</h5>
+                    <div class="social-icons">
+                        <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+                            <i class="bi bi-facebook"></i>
+                            <img src="img/facebook.svg" alt="">
+                        </a>
+                        <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                            <img src="img/instagram.svg" alt="">
+                        </a>
+                        <a href="https://twitter.com" target="_blank" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                            <img src="img/twitter-x.svg" alt="">
+                        </a>
+                        <a href="https://youtube.com" target="_blank" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                            <img src="img/youtube.svg" alt="">
+                        </a>
+                        <a href="https://whatsapp.com" target="_blank" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                            <img src="img/whatsapp.svg" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr style="border-color: rgba(255,255,255,0.2); margin: 2rem 0;">
+            <div class="text-center" style="color: rgba(255,255,255,0.6);">
+                <p>&copy; 2025 Dark Kitchen. Todos los derechos reservados. Medellín, Colombia.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        window.addEventListener('scroll', function () {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'linear-gradient(135deg, rgba(45, 80, 22, 0.95), rgba(107, 142, 35, 0.95))';
+                navbar.style.backdropFilter = 'blur(10px)';
+            } else {
+                navbar.style.background = 'linear-gradient(135deg, var(--primary-color), var(--secondary-color))';
+            }
+        });
+
+        document.querySelector('form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('¡Gracias por tu inscripción! Nos pondremos en contacto contigo pronto.');
+            this.reset();
+        });
+    </script>
+</body>
+
+</html>
